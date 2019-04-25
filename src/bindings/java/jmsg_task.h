@@ -41,6 +41,7 @@ JNIEXPORT jdouble JNICALL Java_org_simgrid_msg_Task_getFlopsAmount(JNIEnv* env, 
 JNIEXPORT void JNICALL Java_org_simgrid_msg_Task_setPriority(JNIEnv* env, jobject jtask, jdouble prioriy);
 JNIEXPORT void JNICALL Java_org_simgrid_msg_Task_setFlopsAmount(JNIEnv* env, jobject jtask, jdouble computationAmount);
 JNIEXPORT void JNICALL Java_org_simgrid_msg_Task_setBytesAmount(JNIEnv* env, jobject jtask, jdouble dataSize);
+JNIEXPORT jdouble JNICALL Java_org_simgrid_msg_Task_getDuration(JNIEnv* env, jobject jtask);
 
 JNIEXPORT void JNICALL Java_org_simgrid_msg_Task_sendBounded(JNIEnv* env, jobject jtask, jstring jalias,
                                                              jdouble  jtimeout, jdouble maxrate);

@@ -539,3 +539,14 @@ JNIEXPORT jint JNICALL Java_org_simgrid_msg_Task_listenFrom(JNIEnv * env, jclass
 
   return (jint) rv;
 }
+
+JNIEXPORT jdouble JNICALL Java_org_simgrid_msg_Task_getDuration(JNIEnv * env, jobject jtask)
+{
+  msg_task_t ptask = jtask_to_native(jtask, env);
+
+  if (not ptask) {
+    jxbt_throw_notbound(env, "task", jtask);
+    return -1;
+  }
+  return (jdouble)MSG_task_get_duration(ptask);
+}

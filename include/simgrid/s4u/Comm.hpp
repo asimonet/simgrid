@@ -28,6 +28,8 @@ class XBT_PUBLIC Comm : public Activity {
   void* src_buff_                     = nullptr;
   size_t src_buff_size_               = sizeof(void*);
   std::atomic_int_fast32_t refcount_{0};
+	double start_time										= -1.0;
+	double end_time										= -1.0;
 
   /* FIXME: expose these elements in the API */
   int detached_                                                           = 0;
@@ -117,6 +119,10 @@ public:
   size_t get_dst_data_size();
 
   s4u::ActorPtr get_sender();
+
+	double get_start_time();
+
+	double get_end_time();
 
 #ifndef DOXYGEN
   XBT_ATTRIB_DEPRECATED_v324("Please use Comm::wait_for()") void wait(double t) override { wait_for(t); }

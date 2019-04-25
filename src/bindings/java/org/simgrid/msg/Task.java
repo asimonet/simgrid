@@ -52,9 +52,9 @@ public class Task {
 			throw new IllegalArgumentException("Task flopsAmount (" + flopsAmount + ") cannot be negative");
 		if (bytesAmount<0)
 			throw new IllegalArgumentException("Task bytesAmount (" + bytesAmount + ") cannot be negative");
-			
+
 		create(name, flopsAmount, bytesAmount);
-		
+
 		this.name = name;
 		this.messageSize = bytesAmount;
 	}
@@ -81,7 +81,7 @@ public class Task {
 			throw new IllegalArgumentException("Host list is null");
 		if (name == null)
 			throw new IllegalArgumentException("Parallel task name is null");
-		
+
 		parallelCreate(name, hosts, flopsAmount, bytesAmount);
 		this.name = name;
 	}
@@ -341,4 +341,6 @@ public class Task {
 	public double getMessageSize() {
 		return this.messageSize;
 	}
+
+	public native double getDuration();
 }

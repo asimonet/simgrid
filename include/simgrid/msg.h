@@ -362,6 +362,8 @@ XBT_PUBLIC void MSG_task_set_bytes_amount(msg_task_t task, double bytes_amount);
 XBT_PUBLIC double MSG_task_get_remaining_communication(msg_task_t task);
 XBT_PUBLIC double MSG_task_get_bytes_amount(msg_task_t task);
 
+XBT_PUBLIC double MSG_task_get_duration(msg_task_t task);
+
 XBT_ATTRIB_DEPRECATED_v325("Getting a task from a specific host is no longer supported."
                            " Use MSG_task_receive_with_timeout instead.") XBT_PUBLIC msg_error_t
     MSG_task_receive_ext(msg_task_t* task, const char* alias, double timeout, msg_host_t host);

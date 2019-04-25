@@ -195,6 +195,12 @@ void Task::report_multiple_use() const
              "(use --cfg=msg/debug-multiple-use:on to get the backtrace of the other process)");
   }
 }
+
+double Task::get_duration()
+{
+	comm->wait_for(-1);
+	return comm->get_end_time() - comm->get_start_time();
+}
 } // namespace msg
 } // namespace simgrid
 
@@ -880,4 +886,9 @@ void MSG_task_set_category(msg_task_t task, const char* category)
 const char* MSG_task_get_category(msg_task_t task)
 {
   return task->get_tracing_category().c_str();
+}
+
+double MSG_task_get_duration(msg_task_t task)
+{
+	return task->get_duration();
 }

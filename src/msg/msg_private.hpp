@@ -69,6 +69,7 @@ public:
   void set_rate(double rate) { rate_ = rate; }
   double get_rate() { return rate_; }
   void set_timeout(double timeout) { timeout_ = timeout; }
+	double get_duration();
 
   s4u::Actor* get_sender();
   s4u::Host* get_source();

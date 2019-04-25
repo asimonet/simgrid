@@ -112,6 +112,7 @@ Comm* Comm::start()
              __FUNCTION__);
 
   if (src_buff_ != nullptr) { // Sender side
+		start_time = MSG_get_clock();
     on_sender_start(*Actor::self());
     pimpl_ = simcall_comm_isend(sender_, mailbox_->get_impl(), remains_, rate_, src_buff_, src_buff_size_, match_fun_,
                                 clean_fun_, copy_data_function_, user_data_, detached_);
@@ -148,6 +149,7 @@ Comm* Comm::wait_for(double timeout)
 
     case State::INITED: // It's not started yet. Do it in one simcall
       if (src_buff_ != nullptr) {
+				start_time = MSG_get_clock();
         on_sender_start(*Actor::self());
         simcall_comm_send(sender_, mailbox_->get_impl(), remains_, rate_, src_buff_, src_buff_size_, match_fun_,
                           copy_data_function_, user_data_, timeout);
@@ -162,6 +164,7 @@ Comm* Comm::wait_for(double timeout)
 
     case State::STARTED:
       simcall_comm_wait(pimpl_, timeout);
+			end_time = MSG_get_clock();
       on_completion(*Actor::self());
       state_ = State::FINISHED;
       break;
@@ -238,6 +241,16 @@ void intrusive_ptr_release(simgrid::s4u::Comm* c)
 void intrusive_ptr_add_ref(simgrid::s4u::Comm* c)
 {
   c->refcount_.fetch_add(1, std::memory_order_relaxed);
+}
+
+double Comm::get_start_time()
+{
+	return start_time;
+}
+
+double Comm::get_end_time()
+{
+	return end_time;
 }
 } // namespace s4u
 } // namespace simgrid
