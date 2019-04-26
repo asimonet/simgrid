@@ -25,5 +25,10 @@ JNIEXPORT void JNICALL Java_org_simgrid_msg_Semaphore_release(JNIEnv * env, jobj
 JNIEXPORT jboolean JNICALL Java_org_simgrid_msg_Semaphore_wouldBlock(JNIEnv * env, jobject obj);
 JNIEXPORT void JNICALL Java_org_simgrid_msg_Semaphore_nativeFinalize(JNIEnv * env, jobject obj);
 
+JNIEXPORT void JNICALL Java_org_simgrid_msg_Barrier_nativeInit(JNIEnv *env, jclass cls);
+JNIEXPORT void JNICALL Java_org_simgrid_msg_Barrier_init(JNIEnv * env, jobject obj, jint count);
+JNIEXPORT void JNICALL Java_org_simgrid_msg_Barrier_enter(JNIEnv * env, jobject obj);
+JNIEXPORT void JNICALL Java_org_simgrid_msg_Barrier_nativeFinalize(JNIEnv * env, jobject obj);
+
 SG_END_DECL()
 #endif

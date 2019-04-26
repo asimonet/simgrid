@@ -37,7 +37,7 @@ int Barrier::wait()
 {
   mutex_->lock();
   arrived_processes_++;
-  XBT_DEBUG("waiting %p %u/%u", this, arrived_processes_, expected_processes_);
+  XBT_DEBUG("waiting %p %u/%u\n", this, arrived_processes_, expected_processes_);
   if (arrived_processes_ == expected_processes_) {
     cond_->notify_all();
     mutex_->unlock();

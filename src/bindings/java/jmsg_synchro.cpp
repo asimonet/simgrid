@@ -91,3 +91,33 @@ JNIEXPORT void JNICALL Java_org_simgrid_msg_Semaphore_nativeFinalize(JNIEnv * en
   sem = (msg_sem_t)(uintptr_t)env->GetLongField(obj, jsynchro_field_Semaphore_bind);
   MSG_sem_destroy(sem);
 }
+
+static jfieldID jsynchro_field_Barrier_bind;
+
+JNIEXPORT void JNICALL Java_org_simgrid_msg_Barrier_nativeInit(JNIEnv *env, jclass cls) {
+  jsynchro_field_Barrier_bind = jxbt_get_sfield(env, "org/simgrid/msg/Barrier", "bind", "J");
+  xbt_assert(jsynchro_field_Barrier_bind, "Native initialization of msg/Barrier failed. Please report that bug");
+}
+
+JNIEXPORT void JNICALL Java_org_simgrid_msg_Barrier_init(JNIEnv * env, jobject obj, jint count) {
+  sg_bar_t barrier = sg_barrier_init((int) count);
+
+  env->SetLongField(obj, jsynchro_field_Barrier_bind, (jlong)(uintptr_t)(barrier));
+}
+
+JNIEXPORT void JNICALL Java_org_simgrid_msg_Barrier_enter(JNIEnv * env, jobject obj) {
+  sg_bar_t barrier;
+
+  barrier         = (sg_bar_t)(uintptr_t)env->GetLongField(obj, jsynchro_field_Barrier_bind);
+  msg_error_t res = sg_barrier_wait(barrier) <= 0 ? MSG_OK : MSG_TIMEOUT;
+  if (res != MSG_OK) {
+    jmsg_throw_status(env, res);
+  }
+}
+
+JNIEXPORT void JNICALL Java_org_simgrid_msg_Barrier_nativeFinalize(JNIEnv * env, jobject obj) {
+  sg_bar_t barrier;
+
+  barrier = (sg_bar_t)(uintptr_t)env->GetLongField(obj, jsynchro_field_Barrier_bind);
+  sg_barrier_destroy(barrier);
+}

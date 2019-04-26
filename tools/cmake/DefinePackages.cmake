@@ -501,6 +501,7 @@ set(JMSG_C_SRC
 set(JMSG_JAVA_SRC
   src/bindings/java/org/simgrid/NativeLib.java
   src/bindings/java/org/simgrid/msg/As.java
+  src/bindings/java/org/simgrid/msg/Barrier.java
   src/bindings/java/org/simgrid/msg/Comm.java
   src/bindings/java/org/simgrid/msg/File.java
   src/bindings/java/org/simgrid/msg/Host.java
@@ -611,7 +612,7 @@ set(MC_SRC
   src/mc/sosp/mc_snapshot.hpp
   src/mc/sosp/mc_snapshot.cpp
   src/mc/sosp/mc_page_snapshot.cpp
-  
+
   src/mc/AddressSpace.hpp
   src/mc/Frame.hpp
   src/mc/Frame.cpp
